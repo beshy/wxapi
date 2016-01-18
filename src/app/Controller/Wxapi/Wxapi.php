@@ -13,6 +13,7 @@ namespace App\Controller\Wxapi;
  */
 class Wxapi extends WxBaseController
 {
+
     /**
      * valid
      *
@@ -28,6 +29,21 @@ class Wxapi extends WxBaseController
         } else {
             echo 'Invalid';
         }
+    }
+
+
+    /**
+     * parse
+     *
+     * @param Request 
+     * @param Response 
+     * @param array 
+     * @return Response
+     */
+    public function parse($req, $res, $args)
+    {
+        $parsedBody = $req->getParsedBody();
+        $this->logger->alert($parsedBody);
     }
 
 
