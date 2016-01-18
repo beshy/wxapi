@@ -1,0 +1,4 @@
+templates_compile
+/src/composer.lock
+/src/vendor
+/tmp/app.log
