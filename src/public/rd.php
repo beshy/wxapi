@@ -11,6 +11,6 @@ if (PHP_SAPI == 'cli-server') {
 
 define('APP_ENV', 'rd');
 
-require dirname(__FILE__).DIRECTORY_SEPARATOR.'boot.php';
+require dirname(__FILE__).DIRECTORY_SEPARATOR.'../boot/boot.php';
 
 $app->run();
