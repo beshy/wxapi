@@ -42,8 +42,13 @@ class Wxapi extends WxBaseController
      */
     public function parse($req, $res, $args)
     {
-        $parsedBody = $req->getParsedBody();
-        $this->logger->alert( print_r($parsedBody, true) );
+        $o = $req->getParsedBody();
+        if ( !empty($o) && $o instanceof SimpleXMLElement ) {
+            $fu = $o->FromUserName;
+            $tu = $o->ToUserName;
+            $content = trim($o->Content);
+            $this->response($fu, $tu, 'recieve data: '.$content);
+        }
     }
 
 
@@ -69,6 +74,30 @@ class Wxapi extends WxBaseController
         }else{
             return false;
         }
+    }
+
+    /**
+     * response
+     *
+     * @param Request 
+     * @param Response 
+     * @param array 
+     * @return Response
+     */
+    public function response($toUsername, $fromUsername, $contentStr, $msgType = 'text' )
+    {
+        $textTpl = "<xml>
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[%s]]></MsgType>
+<Content><![CDATA[%s]]></Content>
+<FuncFlag>0</FuncFlag>
+</xml>";
+
+        $s = sprintf($textTpl, $toUsername, $fromUsername, time(), $msgType, $contentStr);
+        echo $s;
+        exit;
     }
 
 }
