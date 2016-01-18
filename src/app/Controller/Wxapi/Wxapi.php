@@ -97,6 +97,7 @@ class Wxapi extends WxBaseController
 
         $s = sprintf($textTpl, $toUsername, $fromUsername, time(), $msgType, $contentStr);
         echo $s;
+        $this->logger->alert($s);
         exit;
     }
 
