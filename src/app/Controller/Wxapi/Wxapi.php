@@ -43,7 +43,7 @@ class Wxapi extends WxBaseController
     public function parse($req, $res, $args)
     {
         $parsedBody = $req->getParsedBody();
-        $this->logger->alert($parsedBody);
+        $this->logger->alert( print_r($parsedBody, true) );
     }
 
 
