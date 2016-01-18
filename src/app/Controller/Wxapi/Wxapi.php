@@ -43,11 +43,11 @@ class Wxapi extends WxBaseController
     public function parse($req, $res, $args)
     {
         $o = $req->getParsedBody();
-        if ( !empty($o) && $o instanceof SimpleXMLElement ) {
+        if ( !empty($o) ) {
             $fu = $o->FromUserName;
             $tu = $o->ToUserName;
             $content = trim($o->Content);
-            $this->response($fu, $tu, 'recieve data: '.$content);
+            $this->_response($fu, $tu, 'recieve data: '.$content);
         }
     }
 
@@ -77,14 +77,9 @@ class Wxapi extends WxBaseController
     }
 
     /**
-     * response
-     *
-     * @param Request 
-     * @param Response 
-     * @param array 
-     * @return Response
+     * _response
      */
-    public function response($toUsername, $fromUsername, $contentStr, $msgType = 'text' )
+    private function _response($toUsername, $fromUsername, $contentStr, $msgType = 'text' )
     {
         $textTpl = "<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
